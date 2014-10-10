@@ -2,8 +2,9 @@
  * Module dependencies
  */
 
-var util = require('util');
-var _ = require('lodash');
+var util = require('util')
+  , utils = require('utilities')
+  , _ = require('lodash');
 _.defaults = require('merge-defaults');
 
 
@@ -58,11 +59,16 @@ module.exports = {
       createdAt: new Date()
     });
 
+    //Names used on MVC
+    scope.name = scope.args[0];
+    scope.nameC = utils.string.capitalize(scope.name);
+    scope.namePlural = utils.inflection.pluralize(scope.name);
+
     // Decide the output filename for use in targets below:
-    scope.filename = scope.args[0];
+    scope.controllerFilename = scope.nameC +"Controller"
 
     // Add other stuff to the scope for use in our templates:
-    scope.whatIsThis = 'an example file created at '+scope.createdAt;
+  
 
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
@@ -88,10 +94,11 @@ module.exports = {
     // The `template` helper reads the specified template, making the
     // entire scope available to it (uses underscore/JST/ejs syntax).
     // Then the file is copied into the specified destination (on the left).
-    './:filename': { template: 'example.template.js' },
+    './api/controllers/:controllerFilename.js': { template: {templatePath: './api/controllers/controller.template.js', force: true}  },
+    './api/models/:nameC.js': { template: {templatePath: './api/models/model.template.js', force: true}  },
 
     // Creates a folder at a static path
-    './hey_look_a_folder': { folder: {} }
+    //'./hey_look_a_folder': { folder: {} }
 
   },
 
