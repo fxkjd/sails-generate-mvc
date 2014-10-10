@@ -101,8 +101,8 @@ module.exports = {
     './api/models/:nameC.js': { template: {templatePath: './api/models/model.template.js', force: true}  },
     
     //CREATE VIEWS
-    './views/:nameC/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
-    './views/:nameC/add.ejs': { template: {templatePath: './views/add.template.js', force: true}  },
+    './views/:name/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
+    './views/:name/add.ejs': { template: {templatePath: './views/add.template.js', force: true}  },
     
     // Creates a folder at a static path
     //'./hey_look_a_folder': { folder: {} }
