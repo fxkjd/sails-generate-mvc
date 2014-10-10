@@ -60,7 +60,7 @@ module.exports = {
     });
 
     //Names used on MVC
-    scope.name = scope.args[0];
+    scope.name = utils.string.decapitalize(scope.args[0]);
     scope.nameC = utils.string.capitalize(scope.name);
     scope.namePlural = utils.inflection.pluralize(scope.name);
     scope.namePluralC = utils.string.capitalize(scope.namePlural);
@@ -71,7 +71,6 @@ module.exports = {
     //Process attributes
     var attributes = scope.args.slice(1);
     attributes = _.map(attributes, processAttr());    
-    console.log (attributes);
 
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
