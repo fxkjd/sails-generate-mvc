@@ -63,12 +63,15 @@ module.exports = {
     scope.name = scope.args[0];
     scope.nameC = utils.string.capitalize(scope.name);
     scope.namePlural = utils.inflection.pluralize(scope.name);
+    scope.namePluralC = utils.string.capitalize(scope.namePlural);
 
     // Decide the output filename for use in targets below:
     scope.controllerFilename = scope.nameC +"Controller"
 
-    // Add other stuff to the scope for use in our templates:
-  
+    //Process attributes
+    var attributes = scope.args.slice(1);
+    attributes = _.map(attributes, processAttr());    
+    console.log (attributes);
 
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
@@ -113,8 +116,26 @@ module.exports = {
 };
 
 
+function processAttr() {
+  return function(attribute, i) {
+    var parts = attribute.split(':');
 
+    if (parts[1] === undefined) parts[1] = 'string';
 
+    // Handle invalidAttributes
+    if (!parts[1] || !parts[0]) {
+      invalidAttributes.push(
+        'Invalid attribute notation:   "' + attribute + '"');
+      return;
+    }
+
+    return {
+      name: parts[0],
+      type: parts[1]
+    };
+
+  }
+}
 
 /**
  * INVALID_SCOPE_VARIABLE()
