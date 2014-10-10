@@ -1,13 +1,14 @@
 {
-  "name": "sails-generate-sails-generate-mvc",
+  "name": "sails-generate-mvc",
   "version": "0.10.0",
-  "description": "sails generate sails-generate-mvc",
+  "description": "sails generate mvc",
   "main": "Generator.js",
   "scripts": {
     "test": "mocha"
   },
   "keywords": [
-    "sails-generate-mvc",
+    "mvc",
+    "scaffold",
     "generator",
     "sails",
     "generate",

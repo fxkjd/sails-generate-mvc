@@ -8,12 +8,12 @@ _.defaults = require('merge-defaults');
 
 
 /**
- * sails-generate-sails-generate-mvc
+ * sails-generate-mvc
  *
  * Usage:
- * `sails generate sails-generate-mvc`
+ * `sails generate mvc`
  *
- * @description Generates a sails-generate-mvc
+ * @description Generates a mvc
  * @help See http://links.sailsjs.org/docs/generators
  */
 
@@ -35,10 +35,10 @@ module.exports = {
     // scope.args are the raw command line arguments.
     //
     // e.g. if someone runs:
-    // $ sails generate sails-generate-mvc user find create update
+    // $ sails generate mvc user find create update
     // then `scope.args` would be `['user', 'find', 'create', 'update']`
     if (!scope.args[0]) {
-      return cb( new Error('Please provide a name for this sails-generate-mvc.') );
+      return cb( new Error('Please provide a name for this mvc.') );
     }
 
     // scope.rootPath is the base path for this generator
@@ -127,7 +127,7 @@ function INVALID_SCOPE_VARIABLE (varname, details, message) {
   var DEFAULT_MESSAGE =
   'Issue encountered in generator "sails-generate-mvc":\n'+
   'Missing required scope variable: `%s`"\n' +
-  'If you are the author of `sails-generate-sails-generate-mvc`, please resolve this '+
+  'If you are the author of `sails-generate-mvc`, please resolve this '+
   'issue and publish a new patch release.';
 
   message = (message || DEFAULT_MESSAGE) + (details ? '\n'+details : '');
