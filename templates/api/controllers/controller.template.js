@@ -7,7 +7,7 @@
 
 module.exports = {
 	
-  'new': function(req,res){
+  'add': function(req,res){
     res.view();    
   },
 
@@ -89,6 +89,7 @@ module.exports = {
       if (err) {
         //TODO add error management
         console.log(err);
+
         req.session.flash = {
           err: err
         }
