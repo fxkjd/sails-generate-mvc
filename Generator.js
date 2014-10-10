@@ -99,7 +99,11 @@ module.exports = {
     // Then the file is copied into the specified destination (on the left).
     './api/controllers/:controllerFilename.js': { template: {templatePath: './api/controllers/controller.template.js', force: true}  },
     './api/models/:nameC.js': { template: {templatePath: './api/models/model.template.js', force: true}  },
-
+    
+    //CREATE VIEWS
+    './views/:nameC/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
+    './views/:nameC/add.ejs': { template: {templatePath: './views/add.template.js', force: true}  },
+    
     // Creates a folder at a static path
     //'./hey_look_a_folder': { folder: {} }
 
