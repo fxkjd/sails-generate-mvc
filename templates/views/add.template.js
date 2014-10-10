@@ -6,7 +6,7 @@
  
  <!-- HEADER -->
   <div class="jumbotron" style="margin-top:40px;">
-    <h1>Add <%= nameC %></h1>
+    <h1>Add <%= name %></h1>
   </div>
   
 
