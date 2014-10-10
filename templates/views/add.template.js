@@ -6,13 +6,9 @@
  
  <!-- HEADER -->
   <div class="jumbotron" style="margin-top:40px;">
-    <h1><%= nameC %></h1>
-    <a href="/user/add" class="btn btn-primary pull-right">Create new <%= name %></a>
+    <h1>Add <%= nameC %></h1>
   </div>
   
-  <!-- SHOW <%= namePlural %> -->
-  
-  
-  
+
 </div>
 
