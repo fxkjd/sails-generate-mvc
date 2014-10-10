@@ -7,7 +7,7 @@
  <!-- HEADER -->
   <div class="jumbotron" style="margin-top:40px;">
     <h1><%= nameC %></h1>
-    <a href="/user/add" class="btn btn-primary pull-right">Create new <%= name %></a>
+    <a href="/<%= name %>/add" class="btn btn-primary pull-right">Create new <%= name %></a>
   </div>
   
   <!-- SHOW <%= namePlural %> -->
