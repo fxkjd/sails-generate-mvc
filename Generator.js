@@ -72,6 +72,11 @@ module.exports = {
     var attributes = scope.args.slice(1);
     scope.attributes = _.map(attributes, processAttr());    
 
+    //Escape chars for EJS
+    scope.S = "<%"
+    scope.SE = "<%="
+    scope.E = "%>"
+
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
     // the `targets` below.
@@ -166,3 +171,4 @@ function INVALID_SCOPE_VARIABLE (varname, details, message) {
 
   return new Error(message);
 }
+
