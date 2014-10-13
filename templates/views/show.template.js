@@ -6,15 +6,16 @@
  
  <!-- HEADER -->
   <div class="jumbotron" style="margin-top:40px;">
-    <h1><%= nameC %></h1>
-    <a href="/<%= name %>/add" class="btn btn-primary pull-right">Create new <%= name %></a>
+    <h1>Show <%= nameC %></h1>
   </div>
   
   <!-- SHOW <%= namePlural %> -->
   
-  <%= S%> for(var i in <%= namePlural %> ){ <%= E %>
-    <%= SE %> <%=namePlural%>[i].id <%= E %> - <a href="/<%=name%>/show/<%= SE %><%=namePlural%>[i].id<%= E %>">Show</a><br>
-  <%= S%> } <%= E %>
+  <% for(var i in attributes){ %>
+    
+    <b><%= attributes[i].name %>:</b> <%= SE %> <%= name%>.<%= attributes[i].name %> <%= E %><br>
+    
+  <% } %>
   
 </div>
 

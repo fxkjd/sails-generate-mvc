@@ -107,6 +107,8 @@ module.exports = {
     //CREATE VIEWS
     './views/:name/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
     './views/:name/add.ejs': { template: {templatePath: './views/add.template.js', force: true}  },
+    './views/:name/show.ejs': { template: {templatePath: './views/show.template.js', force: true}  },
+    './views/:name/edit.ejs': { template: {templatePath: './views/edit.template.js', force: true}  },
     
     // Creates a folder at a static path
     //'./hey_look_a_folder': { folder: {} }
