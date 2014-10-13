@@ -42,7 +42,7 @@
   <% } %>
   
   <div class="buttonsContainer">
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-primary">Update</button>
   </div>
 </form>
   

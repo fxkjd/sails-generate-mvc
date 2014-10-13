@@ -75,6 +75,7 @@ module.exports = {
     //Escape chars for EJS
     scope.S = "<%"
     scope.SE = "<%="
+    scope.SP = "<%-"
     scope.E = "%>"
 
     // When finished, we trigger a callback with no error

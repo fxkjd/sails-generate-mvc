@@ -19,9 +19,7 @@
   <form role="form" action="/user/create">
 
   <% for(var i in attributes){ %>
-    
-    
-    
+
     <% if(attributes[i].type == "string"){ %>
       <div class="form-group">
         <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
@@ -42,7 +40,7 @@
   <% } %>
   
   <div class="buttonsContainer">
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-primary">Create</button>
   </div>
 </form>
   
