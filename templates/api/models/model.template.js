@@ -8,10 +8,10 @@
 module.exports = {
 
   tableName: '<%=namePlural%>',
-
+  <%=attributes.length%>
   attributes: {
   <% for(var i in attributes) { %>
-    <%=attributes[i].name%> : { type: '<%=attributes[i].type%>'},
+    <%=attributes[i].name%> : { type: '<%=attributes[i].type%>'}<%if(i < attributes.length - 1 ){%>,<%}%>
   <% } %>
   }
 };
