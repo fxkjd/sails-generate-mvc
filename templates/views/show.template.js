@@ -14,7 +14,7 @@
  <!-- HEADER -->
   <div class="jumbotron" style="margin-top:40px;">
     <h1>Show</h1>
-    <a href="/<%= name %>" class="btn pull-right">Go to the index</a>
+    <a href="/<%= name %>" class="btn btn-default pull-right">Go to the index</a>
   </div>
 
   <% for(var i in attributes){ %>
