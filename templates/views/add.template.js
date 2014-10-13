@@ -16,7 +16,7 @@
     <h1>Add <%= name %></h1>
   </div>
   
-  <form role="form" action="/user/create">
+  <form role="form" action="/<%= name %>/create">
 
   <% for(var i in attributes){ %>
 

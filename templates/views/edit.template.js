@@ -16,7 +16,7 @@
     <h1>Edit <%= name %></h1>
   </div>
   
-  <form role="form" action="/user/update/<%=SE%><%= name%>.id<%=E%>">
+  <form role="form" action="/<%= name %>/update/<%=SE%><%= name%>.id<%=E%>">
 
   <% for(var i in attributes){ %>
     
