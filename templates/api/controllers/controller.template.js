@@ -14,6 +14,9 @@ module.exports = {
   create: function(req, res) {
 
     var paramObj = {
+      <% for(var i in attributes) { %>
+        <%=attributes[i].name%> : req.param('<%=attributes[i].name%>')<%if(i < attributes.length - 1 ){%>,<%}%>
+      <% } %>
     }
 
     // Create a <%=nameC%> with the params sent from 
@@ -82,7 +85,9 @@ module.exports = {
   update: function(req, res, next) {
 
     var paramObj = {
-
+      <% for(var i in attributes) { %>
+        <%=attributes[i].name%> : req.param('<%=attributes[i].name%>')<%if(i < attributes.length - 1 ){%>,<%}%>
+      <% } %>
     }
 
     <%=nameC%>.update(req.param('id'), paramObj, function (err) {
