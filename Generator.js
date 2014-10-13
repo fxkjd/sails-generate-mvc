@@ -70,7 +70,7 @@ module.exports = {
 
     //Process attributes
     var attributes = scope.args.slice(1);
-    attributes = _.map(attributes, processAttr());    
+    scope.attributes = _.map(attributes, processAttr());    
 
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by

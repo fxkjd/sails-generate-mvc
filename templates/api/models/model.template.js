@@ -7,8 +7,12 @@
 
 module.exports = {
 
-  attributes: {
+  tableName: '<%=namePlural%>',
 
+  attributes: {
+  <% for(var i in attributes) { %>
+    <%=attributes[i].name%> : { type: '<%=attributes[i].type%>'},
+  <% } %>
   }
 };
 
