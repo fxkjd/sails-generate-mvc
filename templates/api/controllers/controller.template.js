@@ -24,14 +24,22 @@ module.exports = {
     <%=nameC%>.create(paramObj, function (err, <%=name%>) {
 
       if (err) {
-        console.log(err);
-        //TODO add error management
-        req.session.flash = {
-          err: err
+        sails.log.error(err);
+
+        if(err.ValidationError){
+
+          error_object = validator(<%=nameC%>, err.ValidationError);
+
+          req.flash('error', JSON.stringify(error_object, null, 2));
+
+          return res.redirect('/<%=name%>/add');
+
+        } else {
+          return res.serverError();
         }
-        return res.redirect('/<%=name%>/add');
+
       } else {
-        res.redirect('/<%=name%>/show/' + <%=name%>.id);
+        return res.redirect('/<%=name%>/show/' + <%=name%>.id);
       }
     });
   },
@@ -92,17 +100,22 @@ module.exports = {
 
     <%=nameC%>.update(req.param('id'), paramObj, function (err) {
       if (err) {
-        //TODO add error management
-        console.log(err);
+        sails.log.error(err);
 
-        req.session.flash = {
-          err: err
+        if(err.ValidationError){
+
+          error_object = validator(<%=nameC%>, err.ValidationError);
+
+          req.flash('error', JSON.stringify(error_object, null, 2));
+
+          return res.redirect('/<%=name%>/edit/' + req.param('id'));
+
+        } else {
+          return res.serverError();
         }
-        return res.redirect('/<%=name%>/edit/' + req.param('id'));
+
       } else {
-
         res.redirect('/<%=name%>/show/' + req.param('id'));
-
       }
     });
   },

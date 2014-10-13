@@ -104,6 +104,7 @@ module.exports = {
     // Then the file is copied into the specified destination (on the left).
     './api/controllers/:controllerFilename.js': { template: {templatePath: './api/controllers/controller.template.js', force: true}  },
     './api/models/:nameC.js': { template: {templatePath: './api/models/model.template.js', force: true}  },
+    './api/services/validator.js': { template: {templatePath: './api/services/validator.template.js', force: true}  },
     
     //CREATE VIEWS
     './views/:name/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },

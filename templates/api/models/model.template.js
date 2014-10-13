@@ -13,6 +13,14 @@ module.exports = {
   <% for(var i in attributes) { %>
     <%=attributes[i].name%> : { type: '<%=attributes[i].type%>'}<%if(i < attributes.length - 1 ){%>,<%}%>
   <% } %>
+  },
+
+  validation_messages: {
+  <% for(var i in attributes) { %>
+    <%=attributes[i].name%> : { 
+      <%=attributes[i].type%>: 'Invalid Type for <%=attributes[i].name%>' 
+    }<%if(i < attributes.length - 1 ){%>,<%}%>
+  <% } %>
   }
 };
 
