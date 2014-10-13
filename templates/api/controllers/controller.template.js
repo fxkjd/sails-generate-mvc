@@ -20,7 +20,7 @@ module.exports = {
     }
 
     // Create a <%=nameC%> with the params sent from 
-    // the sign-up form --> new.ejs
+    // the sign-up form --> add.ejs
     <%=nameC%>.create(paramObj, function (err, <%=name%>) {
 
       if (err) {
@@ -29,7 +29,7 @@ module.exports = {
         req.session.flash = {
           err: err
         }
-        return res.redirect('/<%=name%>/new');
+        return res.redirect('/<%=name%>/add');
       } else {
         res.redirect('/<%=name%>/show/' + <%=name%>.id);
       }
