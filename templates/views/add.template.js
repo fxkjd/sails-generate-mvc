@@ -16,27 +16,29 @@
     <h1>Add <%= name %></h1>
   </div>
   
-  <form role="form" action="/users/add">
+  <form role="form" action="/user/create">
 
   <% for(var i in attributes){ %>
+    
+    
+    
     <% if(attributes[i].type == "string"){ %>
       <div class="form-group">
         <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-        <input type="text" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
+        <input type="text" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
       </div>
     <% } %>
+      
+      
     <% if(attributes[i].type == "date"){ %>
       <div class="form-group">
         <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-        <input type="date" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
+        <input type="date" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
       </div>
     <% } %>
-    <% if(attributes[i].type == "password"){ %>
-      <div class="form-group">
-        <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-        <input type="password" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
-      </div>
-    <% } %>
+
+      
+      
   <% } %>
   
   <div class="buttonsContainer">

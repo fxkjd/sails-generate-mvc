@@ -12,7 +12,9 @@
   
   <!-- SHOW <%= namePlural %> -->
   
-  
+  <% for(var i in namePlural){ %>
+    <%= namePlural[i].id %> - <a href="/<%= name %>/<%= namePlural[i].id %>">Show</a> - <a href="/<%= name %>/<%= namePlural[i].id %>/edit">Edit</a> - <a href="#">Delete</a>
+  <% } %>
   
 </div>
 
