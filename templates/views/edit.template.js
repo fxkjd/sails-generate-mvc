@@ -35,21 +35,21 @@
     <% if( attributes[i].type == "string" ){ %>
         <div class="form-group">
           <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-          <input type="text" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
+          <input type="text" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>">
         </div>
       <% } %>
         
       <% if( attributes[i].type == "date" ){ %>
         <div class="form-group">
           <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-          <input type="date" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
+          <input type="date" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>">
         </div>
       <% } %>
         
       <% if( attributes[i].type == "int" ){ %>
         <div class="form-group">
           <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-          <input type="number" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
+          <input type="number" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>">
         </div>
       <% } %>
 
