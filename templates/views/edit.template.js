@@ -28,7 +28,7 @@
     </div>
   <%= S %> } <%= E %>
   
-  <form class="form" role="form" action="/<%= name %>/update/<%=SE%><%= name%>.id<%=E%>">
+  <form role="form" action="/<%= name %>/update/<%=SE%><%= name%>.id<%=E%>">
 
   <%= SP %> partial('form.ejs', {<%= name %>:<%= name %>}) <%= E %>
   
