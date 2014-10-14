@@ -16,10 +16,16 @@ module.exports = {
           code: 500
         });
       } else {
-        return res.json({
-          code: 200,
-          path: image.path(file.filename)
-        });
+        if(!file){ 
+          return res.json({
+            code: 400
+          });
+        } else {
+          return res.json({
+            code: 200,
+            path: image.path(file.filename)
+          });
+        }
       }
     });
   }
