@@ -72,7 +72,6 @@ module.exports = {
     var attributes = scope.args.slice(1);
     scope.attributes = _.map(attributes, processAttr());    
     scope.hasImage = hasImage(scope.attributes);
-    console.log("HasImage? " + scope.hasImage);
 
     //Escape chars for EJS
     scope.S = "<%"
@@ -160,7 +159,6 @@ function processAttr() {
 
 function hasImage(attributes) {
   var hasImage = false; 
-  console.log(attributes);
   for(var i in attributes){
     if(attributes[i].type == 'image') {
       hasImage = true;

@@ -22,8 +22,8 @@ module.exports = {
               cb(err, null);
             } else {
               var file = {
-                filename = filename,
-                parth = source
+                filename: filename,
+                parth: source
               };
               cb(null, file);
             }
