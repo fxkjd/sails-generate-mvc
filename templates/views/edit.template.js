@@ -36,6 +36,14 @@
     <button type="submit" class="btn btn-primary">Update</button>
   </div>
 </form>
+    
+    <% for(var i in attributes){ %>
+      <% if( attributes[i].type == "image" ){ %>
+        <form class="form" id="<%= attributes[i].name %>Form" enctype="multipart/form-data" action="/image/upload">
+          <input type="file" id="<%= attributes[i].name %>Input" name="image" class="imageInput" style="display:none !important">
+        </form>
+      <% } %>
+    <% } %>
   
 
 </div>

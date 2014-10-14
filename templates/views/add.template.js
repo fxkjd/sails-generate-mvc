@@ -28,14 +28,23 @@
     </div>
   <%= S %> } <%= E %>
   
-  <form class="form" role="form" enctype="multipart/form-data" action="/<%= name %>/create">
+  <form role="form" action="/<%= name %>/create">
 
   <%= SP %> partial('form.ejs', {<%= name %>:<%= name %>}) <%= E %>
   
   <div class="buttonsContainer">
     <button type="submit" class="btn btn-primary">Create</button>
   </div>
-</form>
+    
+  </form>
+    
+    <% for(var i in attributes){ %>
+      <% if( attributes[i].type == "image" ){ %>
+        <form class="form" id="<%= attributes[i].name %>Form" enctype="multipart/form-data" action="/image/upload">
+          <input type="file" id="<%= attributes[i].name %>Input" name="image" class="imageInput" style="display:none !important">
+        </form>
+      <% } %>
+    <% } %>
   
 
 </div>
