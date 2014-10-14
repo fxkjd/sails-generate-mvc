@@ -10,7 +10,7 @@
       <input type="date" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>">
         
     <% } else if( attributes[i].type == "image" ){ %>
-      <input type="file" id="<%= attributes[i].name %>Field" name="<%= attributes[i].name %>" class="imageInput">
+      <input type="file" id="<%= attributes[i].name %>Field" name="image" class="imageInput">
 
     <% } else if( attributes[i].type == "int" ){ %>
       <input type="number" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>">
