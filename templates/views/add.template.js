@@ -28,7 +28,7 @@
     </div>
   <%= S %> } <%= E %>
   
-  <form class="form" role="form" action="/<%= name %>/create">
+  <form class="form" role="form" enctype="multipart/form-data" action="/<%= name %>/create">
 
   <%= SP %> partial('form.ejs', {<%= name %>:<%= name %>}) <%= E %>
   
