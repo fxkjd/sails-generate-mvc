@@ -5,10 +5,19 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var sample = {<% for(var i in attributes) { %>
+  <%=attributes[i].name%> : ''<%if(i < attributes.length - 1 ){%>,<%}%><% } %>
+}
+
 module.exports = {
 	
-  add: function(req,res){    
-    res.view();    
+  add: function(req,res){   
+    var paramObj = req.flash('paramObj')
+      , obj = (paramObj[0]) ? paramObj[0] : {}; 
+
+    res.view({
+      <%=name%>: _.defaults(obj, sample)
+    });    
   },
 
   create: function(req, res) {
@@ -31,6 +40,8 @@ module.exports = {
           error_object = validator(<%=nameC%>, err.ValidationError);
 
           req.flash('error', error_object);
+
+          req.flash('paramObj', paramObj);
 
           return res.redirect('/<%=name%>/add');
 
