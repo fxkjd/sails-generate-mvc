@@ -23,7 +23,7 @@ module.exports = {
             } else {
               var file = {
                 filename: filename,
-                parth: source
+                path: source
               };
               cb(null, file);
             }
