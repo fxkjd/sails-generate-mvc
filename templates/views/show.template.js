@@ -18,7 +18,12 @@
   </div>
 
   <% for(var i in attributes){ %>
-    <b><%= attributes[i].name %>:</b> <%= SE %> <%= name%>.<%= attributes[i].name %> <%= E %><br>
+	<% if(attributes[i].type == "image"){ %>
+		<p><b><%= attributes[i].name %>:</b><br>
+		<img src='<%= SE %> <%= name%>.<%= attributes[i].name %> <%= E %>' width='100px'></p>
+	<% }else{ %>
+		<p><b><%= attributes[i].name %>:</b> <%= SE %> <%= name%>.<%= attributes[i].name %> <%= E %></p>
+	<% } %>
   <% } %>
     
   <br><br>

@@ -1,6 +1,9 @@
 <!-- Latest compiled and minified CSS -->
 <!-- Delete that line if you don't want to use Bootstrap or you're using it -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <div class="container">
  
@@ -36,7 +39,15 @@
       <td><%= SE %> <%=namePlural%>[i].id <%= E %></td>
       
       <% for(var ii in attributes){ %>
-        <td><%= SE %> <%=namePlural%>[i].<%= attributes[ii].name %><%= E %></td>
+		<% if(attributes[ii].type == "image"){ %>
+			<td>
+			<%= S %> if(<%=namePlural%>[i].<%= attributes[ii].name %>){ <%= E %>
+			<a href="#" tabindex="0" class="popi" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="<img src='<%= SE %><%=namePlural%>[i].<%= attributes[ii].name %><%= E %>' width='100px'>" data-html="true"><i class="glyphicon glyphicon-camera"></i></a>
+			<%= S %> } <%= E %>
+			</td>
+		<% }else{ %>
+			<td><%= SE %> <%=namePlural%>[i].<%= attributes[ii].name %><%= E %></td>
+		<% } %>
       <% } %>
         
       <td><%= SE %> <%=namePlural%>[i].createdAt<%= E %></td>
@@ -55,3 +66,4 @@
   
 </div>
 
+<script>$(function(){$('.popi').popover()});</script>
