@@ -10,18 +10,14 @@
 </style>
 
 <div class="container">
-  
-  <%= S %> if(req.flash('error')){ <%= E %>
-    <div class="alert alert-danger" role="alert"><%= SP %>req.flash('error')<%= E %></div>
-  <%= S %> } <%= E %>
- 
+
  <!-- HEADER -->
   <div class="jumbotron" style="margin-top:40px;">
     <h1>Add <%= name %></h1>
   </div>
   
   <%= S %> if( req.session.flash && req.session.flash.error ){ <%= E %>
-    <%= S %> var error = req.flash('error'); <%= E %>
+    <%= S %> var error = req.flash('error') <%= E %>
     <div class="alert alert-danger" role="alert">
     <b>Error</b>
      <ul>
@@ -35,28 +31,28 @@
   <form role="form" action="/<%= name %>/create">
 
   <% for(var i in attributes){ %>
-    <% switch(attributes[i].type){ %>
-      <% case "string" : %>
+    
+    <% if( attributes[i].type == "string" ){ %>
         <div class="form-group">
           <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
           <input type="text" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
         </div>
-      <% break; %>
+      <% } %>
         
-      <% case "date" : %>
+      <% if( attributes[i].type == "date" ){ %>
         <div class="form-group">
           <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
           <input type="date" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
         </div>
-      <% break; %>
+      <% } %>
         
-      <% case "int" : %>
+      <% if( attributes[i].type == "int" ){ %>
         <div class="form-group">
           <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
           <input type="number" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
         </div>
-      <% break; %>
-    <% } %>
+      <% } %>
+
   <% } %>
   
   <div class="buttonsContainer">
