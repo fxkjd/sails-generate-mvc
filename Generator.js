@@ -79,6 +79,11 @@ module.exports = {
     scope.SP = "<%-"
     scope.E = "%>"
 
+    //modify package.json
+    if(scope.hasImage){
+      updatePackage (scope.rootPath);
+    }
+
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
     // the `targets` below.
@@ -165,6 +170,16 @@ function hasImage(attributes) {
     }
   }
   return hasImage;
+}
+
+function updatePackage (path) {
+  var filename = path + '/package.json'
+  var packageJson = require(filename);  
+  var fs = require('fs');
+  packageJson.dependencies['node-uuid'] = "latest";
+  packageJson.dependencies['fs-extra'] = "latest";
+
+  fs.writeFileSync(filename, JSON.stringify(packageJson,null,2));
 }
 
 /**

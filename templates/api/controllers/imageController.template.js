@@ -18,7 +18,6 @@ module.exports = {
       } else {
         return res.json({
           code: 200,
-          filename: file.filename,
           path: image.path(file.filename)
         });
       }
