@@ -7,7 +7,7 @@
 
 module.exports = {
 	
-  'add': function(req,res){
+  add: function(req,res){
     res.view();    
   },
 
@@ -30,7 +30,7 @@ module.exports = {
 
           error_object = validator(<%=nameC%>, err.ValidationError);
 
-          req.flash('error', JSON.stringify(error_object, null, 2));
+          req.flash('error', error_object);
 
           return res.redirect('/<%=name%>/add');
 
@@ -106,7 +106,7 @@ module.exports = {
 
           error_object = validator(<%=nameC%>, err.ValidationError);
 
-          req.flash('error', JSON.stringify(error_object, null, 2));
+          req.flash('error', error_object);
 
           return res.redirect('/<%=name%>/edit/' + req.param('id'));
 
