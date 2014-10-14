@@ -28,32 +28,9 @@
     </div>
   <%= S %> } <%= E %>
   
-  <form role="form" action="/<%= name %>/create">
+  <form class="form" role="form" action="/<%= name %>/create">
 
-  <% for(var i in attributes){ %>
-    
-    <% if( attributes[i].type == "string" ){ %>
-        <div class="form-group">
-          <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-          <input type="text" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
-        </div>
-      <% } %>
-        
-      <% if( attributes[i].type == "date" ){ %>
-        <div class="form-group">
-          <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-          <input type="date" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
-        </div>
-      <% } %>
-        
-      <% if( attributes[i].type == "int" ){ %>
-        <div class="form-group">
-          <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
-          <input type="number" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>">
-        </div>
-      <% } %>
-
-  <% } %>
+  <%= SP %> partial('form.ejs', {<%= name %>:<%= name %>}) <%= E %>
   
   <div class="buttonsContainer">
     <button type="submit" class="btn btn-primary">Create</button>
