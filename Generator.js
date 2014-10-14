@@ -71,6 +71,8 @@ module.exports = {
     //Process attributes
     var attributes = scope.args.slice(1);
     scope.attributes = _.map(attributes, processAttr());    
+    scope.hasImage = hasImage(scope.attributes);
+    console.log("HasImage? " + scope.hasImage);
 
     //Escape chars for EJS
     scope.S = "<%"
@@ -105,6 +107,10 @@ module.exports = {
     './api/controllers/:controllerFilename.js': { template: {templatePath: './api/controllers/controller.template.js', force: true}  },
     './api/models/:nameC.js': { template: {templatePath: './api/models/model.template.js', force: true}  },
     './api/services/validator.js': { template: {templatePath: './api/services/validator.template.js', force: true}  },
+
+    './api/services/image.js': { template: {templatePath: './api/services/image.template.js', force: true}  },
+    './api/controllers/ImageController.js': { template: {templatePath: './api/controllers/imageController.template.js', force: true}  },
+
     
     //CREATE VIEWS
     './views/:name/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
@@ -132,12 +138,14 @@ function processAttr() {
   return function(attribute, i) {
     var parts = attribute.split(':');
 
-    if (parts[1] === undefined) parts[1] = 'string';
+    if (parts[1] === undefined) {
+      parts[1] = 'string';
+    }
 
-    // Handle invalidAttributes
+    // Handle Attributes that are invalid
     if (!parts[1] || !parts[0]) {
       invalidAttributes.push(
-        'Invalid attribute notation:   "' + attribute + '"');
+        'Invalid attribute :   "' + attribute + '"');
       return;
     }
 
@@ -147,6 +155,17 @@ function processAttr() {
     };
 
   }
+}
+
+function hasImage(attributes) {
+  var hasImage = false; 
+  console.log(attributes);
+  for(var i in attributes){
+    if(attributes[i].type == 'image') {
+      hasImage = true;
+    }
+  }
+  return hasImage;
 }
 
 /**

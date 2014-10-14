@@ -11,7 +11,7 @@ module.exports = {
 
   attributes: {
   <% for(var i in attributes) { %>
-    <%=attributes[i].name%> : { type: '<%=attributes[i].type%>'}<%if(i < attributes.length - 1 ){%>,<%}%>
+    <%=attributes[i].name%> : { type: <%if(attributes[i].type == 'image'){%>'string'<%}else{%>'<%=attributes[i].type%>'<%}%>}<%if(i < attributes.length - 1 ){%>,<%}%>
   <% } %>
   },
 
