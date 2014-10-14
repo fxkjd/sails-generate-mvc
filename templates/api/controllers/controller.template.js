@@ -7,7 +7,7 @@
 
 module.exports = {
 	
-  add: function(req,res){
+  add: function(req,res){    
     res.view();    
   },
 
@@ -82,8 +82,11 @@ module.exports = {
         if (!<%=name%>) {
           return res.notFound();
         } else {
+          var paramObj = req.flash('paramObj')
+            , obj = (paramObj[0]) ? paramObj[0] : {};
+
           res.view({
-            <%=name%>: <%=name%>
+            <%=name%>: _.defaults(obj, <%=name%>)
           });
         }
       }
@@ -107,6 +110,8 @@ module.exports = {
           error_object = validator(<%=nameC%>, err.ValidationError);
 
           req.flash('error', error_object);
+
+          req.flash('paramObj', paramObj);
 
           return res.redirect('/<%=name%>/edit/' + req.param('id'));
 
