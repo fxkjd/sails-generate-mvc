@@ -23,7 +23,6 @@ module.exports = {
             } else {
               var file = {
                 filename: filename,
-                path: source
               };
               cb(null, file);
             }

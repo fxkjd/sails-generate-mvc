@@ -9,7 +9,7 @@
 module.exports = {
 	
   upload: function(req,res){   
-    image.upload(req, 'image', function (err, image) {
+    image.upload(req, 'image', function (err, file) {
       if (err) {
         console.error(err);
         return res.json({
@@ -18,8 +18,8 @@ module.exports = {
       } else {
         return res.json({
           code: 200,
-          filename: image.filename,
-          path: image.path
+          filename: file.filename,
+          path: image.path(file.filename)
         });
       }
     });
