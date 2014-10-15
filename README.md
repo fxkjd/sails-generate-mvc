@@ -2,6 +2,8 @@
 
 A `MVC` generator for use with the Sails command-line interface.
 
+![MVC Sample](http://i.imgur.com/4bzthh6.jpg)
+
 Certain generators are installed by default in Sails, but they can be overridden.  Other generators create entirely new things.  Check the [Sails docs](http://sailsjs.org/#!documentation) for information on installing generator overrides / custom generators and information on building your own generators.
 
 

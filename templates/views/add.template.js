@@ -1,6 +1,3 @@
-<!-- Latest compiled and minified CSS -->
-<!-- Delete that line if you don't want to use Bootstrap or you're using it -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <style>
   .buttonsContainer{
     background: #f0f0f0;

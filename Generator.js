@@ -131,9 +131,9 @@ module.exports = {
     './views/:name/show.ejs': { template: {templatePath: './views/show.template.js', force: true}  },
     './views/:name/edit.ejs': { template: {templatePath: './views/edit.template.js', force: true}  },
     './views/:name/form.ejs': { template: {templatePath: './views/form.template.js', force: true}  },
-    
-    // Creates a folder at a static path
-    //'./hey_look_a_folder': { folder: {} }
+	  
+	//CREATE SCRIPTS
+	'./assets/js/mvc-scripts.js': { template: {templatePath: './assets/js/scripts.template.js', force: true}  },
 
   },
 
