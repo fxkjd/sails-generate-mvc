@@ -1,5 +1,15 @@
-  <% for(var i in attributes){ %>
+<!-- SELECT i18n -->
+  <div class="form-group">
+    <label for="">Select language:</label>
+     <select id="languages" name="languages">
+      <% for(var l in languages){ %>
+        <option id="<%= languages[l]%>" value="<%= languages[l]%>"><%= languages[l]%></option>
+      <% } %>		
+    </select>
+  </div>
+ 
 
+ <% for(var i in attributes){ %>
   <div class="form-group">
     <label for="input<%= attributes[i].name %>"><%= attributes[i].name %></label>
 

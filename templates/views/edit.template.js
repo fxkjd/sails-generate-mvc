@@ -3,6 +3,7 @@
     background: #f0f0f0;
     border-top: 2px solid #eee;
     padding: 20px;
+	margin-bottom: 50px;
   }
 </style>
 
