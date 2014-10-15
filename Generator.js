@@ -74,14 +74,13 @@ module.exports = {
     scope.languages = [];
 
     if(scope.hasI18N){
-      scope.languages = attributes[0].split(':').slice(1);
-      attributes = scope.args.slice(2);      
+      scope.languages = attributes[attributes.length-1].split(':').slice(1);
+      attributes = scope.args.slice(1,scope.args.length-1);      
     }
 
-    scope.attributes = _.map(attributes, processAttr());    
+    scope.attributes = _.map(attributes, processAttr(scope.hasI18N));    
     scope.hasImage = hasImage(scope.attributes);
-
-    
+  
     //Escape chars for EJS
     scope.S = "<%"
     scope.SE = "<%="
@@ -93,6 +92,7 @@ module.exports = {
       updatePackage (scope.rootPath);
     }
 
+    //adapt targets
     if(scope.hasImage){
       addImageFiles(this.targets)
     }
@@ -148,12 +148,17 @@ module.exports = {
 };
 
 
-function processAttr() {
+function processAttr(hasI18N) {
   return function(attribute, i) {
-    var parts = attribute.split(':');
+    var parts = attribute.split(':')
+      , i18n = false;
 
     if (parts[1] === undefined) {
       parts[1] = 'string';
+    }
+
+    if(parts[2] && parts[2] == "i18n" && hasI18N){
+      i18n = true;
     }
 
     // Handle Attributes that are invalid
@@ -165,7 +170,8 @@ function processAttr() {
 
     return {
       name: parts[0],
-      type: parts[1]
+      type: parts[1],
+      i18n: i18n
     };
 
   }
@@ -184,7 +190,7 @@ function hasImage(attributes) {
 }
 
 function hasI18N(attributes) {
-  var parts = attributes[0].split(':')
+  var parts = attributes[attributes.length-1].split(':')
     , hasI18N = false; 
 
   if (parts[0] == "i18n" && parts.length > 1) {
