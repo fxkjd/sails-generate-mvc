@@ -70,9 +70,18 @@ module.exports = {
 
     //Process attributes
     var attributes = scope.args.slice(1);
+    scope.hasI18N = hasI18N(attributes);
+    scope.languages = [];
+
+    if(scope.hasI18N){
+      scope.languages = attributes[0].split(':').slice(1);
+      attributes = scope.args.slice(2);      
+    }
+
     scope.attributes = _.map(attributes, processAttr());    
     scope.hasImage = hasImage(scope.attributes);
 
+    
     //Escape chars for EJS
     scope.S = "<%"
     scope.SE = "<%="
@@ -82,6 +91,10 @@ module.exports = {
     //modify package.json
     if(scope.hasImage){
       updatePackage (scope.rootPath);
+    }
+
+    if(scope.hasImage){
+      addImageFiles(this.targets)
     }
 
     // When finished, we trigger a callback with no error
@@ -111,10 +124,6 @@ module.exports = {
     './api/controllers/:controllerFilename.js': { template: {templatePath: './api/controllers/controller.template.js', force: true}  },
     './api/models/:nameC.js': { template: {templatePath: './api/models/model.template.js', force: true}  },
     './api/services/validator.js': { template: {templatePath: './api/services/validator.template.js', force: true}  },
-
-    './api/services/image.js': { template: {templatePath: './api/services/image.template.js', force: true}  },
-    './api/controllers/ImageController.js': { template: {templatePath: './api/controllers/imageController.template.js', force: true}  },
-
     
     //CREATE VIEWS
     './views/:name/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
@@ -164,12 +173,25 @@ function processAttr() {
 
 function hasImage(attributes) {
   var hasImage = false; 
+
   for(var i in attributes){
     if(attributes[i].type == 'image') {
       hasImage = true;
     }
   }
+
   return hasImage;
+}
+
+function hasI18N(attributes) {
+  var parts = attributes[0].split(':')
+    , hasI18N = false; 
+
+  if (parts[0] == "i18n" && parts.length > 1) {
+    hasI18N = true;
+  }
+
+  return hasI18N;
 }
 
 function updatePackage (path) {
@@ -180,6 +202,13 @@ function updatePackage (path) {
   packageJson.dependencies['fs-extra'] = "latest";
 
   fs.writeFileSync(filename, JSON.stringify(packageJson,null,2));
+}
+
+function addImageFiles(targets){
+
+    targets['./api/services/image.js'] = { template: {templatePath: './api/services/image.template.js', force: true}  };
+    targets['./api/controllers/ImageController.js'] = { template: {templatePath: './api/controllers/imageController.template.js', force: true}  };
+    targets['./assets/js/mvc-image-scripts.js'] = { template: {templatePath: './assets/js/image-scripts.template.js', force: true} }; 
 }
 
 /**
