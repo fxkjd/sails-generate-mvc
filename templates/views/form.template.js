@@ -16,7 +16,7 @@
     
      <% if( attributes[i].i18n ){ %>
        <% for(var l in languages){ %>
-         <input type="text" name="<%= attributes[i].name %>" class="form-control lang <%=languages[l]%>" id="" placeholder="Enter <%= attributes[i].name %> in language <%=languages[l]%>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>" <% if(l>0){ %>style="display:none"<%}%>>
+         <input type="text" name="<%= attributes[i].name %><%=languages[l]%>" class="form-control lang <%=languages[l]%>" id="" placeholder="Enter <%= attributes[i].name %> in language <%=languages[l]%>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>" <% if(l>0){ %>style="display:none"<%}%>>
        <% } %>
      <% }else{ %>
        <input type="text" name="<%= attributes[i].name %>" class="form-control" id="" placeholder="Enter <%= attributes[i].name %>" value="<%=SE%><%= name%>.<%= attributes[i].name %><%=E%>">
