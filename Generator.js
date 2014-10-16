@@ -230,7 +230,7 @@ function addImageFiles(targets){
 
 function addI18NFiles(targets,languages){
 
-  targets['./api/models/content.js'] = { template: {templatePath: './api/models/content.template.js', force: true}  };
+  targets['./api/models/Content.js'] = { template: {templatePath: './api/models/content.template.js', force: true}  };
   targets['./api/services/local.js'] = { template: {templatePath: './api/services/local.template.js', force: true}  };
   targets['./api/services/:localFilename.js'] = { template: {templatePath: './api/services/localModel.template.js', force: true}  };
   targets['./config/i18n.js'] = { template: {templatePath: './config/i18n.template.js', force: true}  };
