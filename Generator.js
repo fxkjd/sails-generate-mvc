@@ -4,6 +4,7 @@
 
 var util = require('util')
   , utils = require('utilities')
+  , clc = require('cli-color')
   , _ = require('lodash');
 _.defaults = require('merge-defaults');
 
@@ -87,7 +88,9 @@ module.exports = {
       scope.attributesI18N = _.remove(scope.attributesNOI18N, function(attr) { return attr.i18n; });
     }
 
-    console.log(scope.attributes);
+    //print attributes
+    console.log(clc.green("Attributes:"));
+    _.forEach(scope.attributes, function(attr) { console.log(attr); });
 
     //Escape chars for EJS
     scope.S = "<%"
