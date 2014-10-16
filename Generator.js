@@ -67,6 +67,7 @@ module.exports = {
 
     // Decide the output filename for use in targets below:
     scope.controllerFilename = scope.nameC +"Controller"
+    scope.localFilename = scope.nameC +"Local"
 
     //Process attributes
     var attributes = scope.args.slice(1);
@@ -80,6 +81,10 @@ module.exports = {
 
     scope.attributes = _.map(attributes, processAttr(scope.hasI18N));    
     scope.hasImage = hasImage(scope.attributes);
+
+    if(scope.hasI18N){
+      scope.attributesI18N = _.remove(scope.attributes, function(attr) { return attr.i18n; });
+    }
   
     //Escape chars for EJS
     scope.S = "<%"
@@ -95,6 +100,9 @@ module.exports = {
     //adapt targets
     if(scope.hasImage){
       addImageFiles(this.targets)
+    }
+    if(scope.hasI18N){
+      addI18NFiles(this.targets)
     }
 
     // When finished, we trigger a callback with no error
@@ -212,9 +220,17 @@ function updatePackage (path) {
 
 function addImageFiles(targets){
 
-    targets['./api/services/image.js'] = { template: {templatePath: './api/services/image.template.js', force: true}  };
-    targets['./api/controllers/ImageController.js'] = { template: {templatePath: './api/controllers/imageController.template.js', force: true}  };
-    targets['./assets/js/mvc-image-scripts.js'] = { template: {templatePath: './assets/js/image-scripts.template.js', force: true} }; 
+  targets['./api/services/image.js'] = { template: {templatePath: './api/services/image.template.js', force: true}  };
+  targets['./api/controllers/ImageController.js'] = { template: {templatePath: './api/controllers/imageController.template.js', force: true}  };
+  targets['./assets/js/mvc-image-scripts.js'] = { template: {templatePath: './assets/js/image-scripts.template.js', force: true} }; 
+}
+
+function addI18NFiles(targets){
+
+  targets['./api/models/content.js'] = { template: {templatePath: './api/models/content.template.js', force: true}  };
+  targets['./api/services/local.js'] = { template: {templatePath: './api/services/local.template.js', force: true}  };
+  targets['./api/services/:localFilename.js'] = { template: {templatePath: './api/services/localModel.template.js', force: true}  };
+
 }
 
 /**
