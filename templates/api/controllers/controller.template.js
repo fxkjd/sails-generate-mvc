@@ -91,10 +91,28 @@ module.exports = {
     <%=nameC%>.find(function (err, <%=namePlural%>) {
       if (err) {
         return next(err);
-      } else {        
+      } else {<%if(hasI18N){%>        
+        async.map(<%=namePlural%>,
+          function(<%=name%>,cb){
+            <%=localFilename%>.findOne(req.getLocale(), <%=name%>, function (err, local) {
+                cb(err, local);
+            });        
+          },
+          // callback
+          function(err, localized){
+            if (err) {
+              sails.log.error(err);
+              res.serverError();
+            } else {
+              res.view({
+                <%=namePlural%>: localized
+              });
+            }
+        });  
+      <%} else {%>  
         res.view({
           <%=namePlural%>: <%=namePlural%>
-        });
+        });<%}%>
       }
     });
   },
@@ -138,7 +156,7 @@ module.exports = {
         <%=attributesNOI18N[i].name%> : req.param('<%=attributesNOI18N[i].name%>')<%if(i < attributesNOI18N.length - 1 ){%>,<%}%><% } %>
     }
 
-    <%=nameC%>.update(req.param('id'), paramObj, function (err) {
+    <%=nameC%>.update(req.param('id'), paramObj, function (err,<%=name%>) {
       if (err) {
         sails.log.error(err);
 
@@ -157,7 +175,7 @@ module.exports = {
         }
 
       } else {<%if(hasI18N){%>
-        <%=localFilename%>.update(req, <%=name%>, function (err, localized) {
+        <%=localFilename%>.update(req, <%=name%>[0], function (err, localized) {
           if (err) {
             sails.log.error(err);
             res.serverError();

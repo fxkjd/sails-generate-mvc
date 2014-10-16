@@ -39,7 +39,7 @@ module.exports = {
   find: function (<%=name%>, cb) {
     async.series({<%for(var i in attributesI18N){%><%for(var j in languages){%>
         <%=attributesI18N[i].name%><%=languages[j]%>: function(callback){
-          local.loadLocal('<%=languages[j]%>', <%=name%>.<%=attributesI18N[i].name%>, function (err, localText) {          
+          local.findLocal('<%=languages[j]%>', <%=name%>.<%=attributesI18N[i].name%>, function (err, localText) {          
             callback(err, localText);              
           });
         },<%}}%>
@@ -55,7 +55,7 @@ module.exports = {
    *           <%=name%> - <%=name%> to be localitzated
    */
 
-  create: function (req, testimonial, cb) {
+  create: function (req, <%=name%>, cb) {
     async.series([<%for(var i in attributesI18N){%><%for(var j in languages){%>
         function(callback){
           if (req.param('<%=attributesI18N[i].name%><%=languages[j]%>')) {
@@ -80,10 +80,10 @@ module.exports = {
    *           <%=name%> - <%=name%> to be localitzated
    */
 
-  update: function (req, testimonial, cb) {
+  update: function (req, <%=name%>, cb) {
     async.series([<%for(var i in attributesI18N){%><%for(var j in languages){%>
         function(callback){
-          if (req.param('<%=attributesI18N[i].name%><%=languages[j]%>')) {
+          if (req.param('<%=attributesI18N[i].name%><%=languages[j]%>') != null) {
             local.updateLocal(req.param('<%=attributesI18N[i].name%><%=languages[j]%>'), '<%=languages[j]%>', <%=name%>.<%=attributesI18N[i].name%>, function (err, localText) {          
               callback(err, localText);              
             });

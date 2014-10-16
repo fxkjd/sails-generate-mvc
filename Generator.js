@@ -87,6 +87,8 @@ module.exports = {
       scope.attributesI18N = _.remove(scope.attributesNOI18N, function(attr) { return attr.i18n; });
     }
 
+    console.log(scope.attributes);
+
     //Escape chars for EJS
     scope.S = "<%"
     scope.SE = "<%="

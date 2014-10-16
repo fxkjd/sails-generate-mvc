@@ -45,15 +45,13 @@ module.exports = {
   createLocal: function (text, lang, parent, cb) {
     var paramObj = {
       text: text,
-
       lang: lang,
-
       parent: parent,
     };
 
     Content.create(paramObj, function (err, content) {    
       if (err) {
-        console.log(err);
+        sails.log.error(err);
         cb(err, null);
       } else {
         cb(null, content);
@@ -67,17 +65,45 @@ module.exports = {
    * lang - language
    * parent - text which is being localized
    */
-  updateLocal: function (text, lang, parent, cb) {
-    var paramObj = {
-      text: text,
-    };
-
-    Content.update({parent:parent, lang:lang}, paramObj, function (err) {    
-      if (err) {
-        console.log(err);
+  updateLocal: function (text, lang, parent, cb) {    
+    var self = this
+      , paramObj = {
+          text: text,
+        };
+    Content.findOne({parent:parent, lang:lang}, function (err,content){
+      if(err) {
+        sails.log.error(err);
         cb(err, null);
       } else {
-        cb(null, null);
+        if(content){
+          Content.update({parent:parent, lang:lang}, paramObj, function (err) {    
+            if (err) {
+              sails.log.error(err);
+              cb(err, null);
+            } else {
+              cb(null, null);
+            }
+          });
+        } else {
+          self.createLocal(text, lang, parent, cb);
+        }
+      }
+    });
+  },
+
+  /**
+   * @description :: retrieves the best localitzated content model 
+   * lang - language
+   * parent - text which is being retrieved
+   */
+  loadLocal: function (lang, parent, cb) {
+
+    Content.find({parent:parent}, function (err, contents) { 
+      if (err || !contents || contents.length <= 0) {
+        sails.log.error(err);
+        cb(err, null);
+      } else {
+        cb(null, contents[ _contentIndex(lang, contents) ].text);        
       }
     });
   },
@@ -87,17 +113,21 @@ module.exports = {
    * lang - language
    * parent - text which is being retrieved
    */
-  loadLocal: function (lang, parent, cb) {
+  findLocal: function (lang, parent, cb) {
 
-    Content.find({parent:parent}, function (err, contents) { 
-      if (err || !contents || contents.length <= 0) {
-        console.log(err);
+    Content.find({parent:parent, lang:lang}, function (err, contents) { 
+      if (err) {
+        sails.log.error(err);
         cb(err, null);
       } else {
-        cb(null, contents[ _contentIndex(lang, contents) ].text);        
+        if(!contents || contents.length <= 0){
+          cb(null, "");        
+        } else {
+          cb(null, contents[0].text);        
+        }
       }
     });
-  }
+  },
 
 };
 
