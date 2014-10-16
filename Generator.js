@@ -80,12 +80,13 @@ module.exports = {
     }
 
     scope.attributes = _.map(attributes, processAttr(scope.hasI18N));    
+    scope.attributesNOI18N = _.map(attributes, processAttr(scope.hasI18N));
     scope.hasImage = hasImage(scope.attributes);
 
     if(scope.hasI18N){
-      scope.attributesI18N = _.remove(scope.attributes, function(attr) { return attr.i18n; });
+      scope.attributesI18N = _.remove(scope.attributesNOI18N, function(attr) { return attr.i18n; });
     }
-  
+
     //Escape chars for EJS
     scope.S = "<%"
     scope.SE = "<%="
@@ -93,16 +94,14 @@ module.exports = {
     scope.E = "%>"
 
     //modify package.json
-    if(scope.hasImage){
-      updatePackage (scope.rootPath);
-    }
+    updatePackage (scope.rootPath, scope.hasImage, scope.hasI18N);
 
     //adapt targets
     if(scope.hasImage){
       addImageFiles(this.targets)
     }
     if(scope.hasI18N){
-      addI18NFiles(this.targets)
+      addI18NFiles(this.targets, scope.languages)
     }
 
     // When finished, we trigger a callback with no error
@@ -208,12 +207,16 @@ function hasI18N(attributes) {
   return hasI18N;
 }
 
-function updatePackage (path) {
+function updatePackage (path, hasImages, hasI18N) {
   var filename = path + '/package.json'
   var packageJson = require(filename);  
   var fs = require('fs');
-  packageJson.dependencies['node-uuid'] = "latest";
-  packageJson.dependencies['fs-extra'] = "latest";
+  if(hasImages || hasI18N){
+    packageJson.dependencies['node-uuid'] = "latest";
+  }
+  if(hasImages){
+    packageJson.dependencies['fs-extra'] = "latest";
+  }
 
   fs.writeFileSync(filename, JSON.stringify(packageJson,null,2));
 }
@@ -225,12 +228,17 @@ function addImageFiles(targets){
   targets['./assets/js/mvc-image-scripts.js'] = { template: {templatePath: './assets/js/image-scripts.template.js', force: true} }; 
 }
 
-function addI18NFiles(targets){
+function addI18NFiles(targets,languages){
 
   targets['./api/models/content.js'] = { template: {templatePath: './api/models/content.template.js', force: true}  };
   targets['./api/services/local.js'] = { template: {templatePath: './api/services/local.template.js', force: true}  };
   targets['./api/services/:localFilename.js'] = { template: {templatePath: './api/services/localModel.template.js', force: true}  };
+  targets['./config/i18n.js'] = { template: {templatePath: './config/i18n.template.js', force: true}  };
 
+  for(var i in languages){
+    
+    targets['./config/locales/'+languages[i]+'.json'] = { template: {templatePath: './config/locales/local.template.js', force: true}  };
+  }
 }
 
 /**

@@ -22,10 +22,8 @@ module.exports = {
 
   create: function(req, res) {
 
-    var paramObj = {
-      <% for(var i in attributes) { %>
-        <%=attributes[i].name%> : req.param('<%=attributes[i].name%>')<%if(i < attributes.length - 1 ){%>,<%}%>
-      <% } %>
+    var paramObj = {<% for(var i in attributesNOI18N) { %>
+        <%=attributesNOI18N[i].name%> : req.param('<%=attributesNOI18N[i].name%>')<%if(i < attributesNOI18N.length - 1 ){%>,<%}%><% } %>
     }
 
     // Create a <%=nameC%> with the params sent from 
@@ -49,8 +47,16 @@ module.exports = {
           return res.serverError();
         }
 
-      } else {
-        return res.redirect('/<%=name%>/show/' + <%=name%>.id);
+      } else {<%if(hasI18N){%>
+        <%=localFilename%>.create(req, <%=name%>, function (err, locals) {
+          if (err) {
+            sails.log.error(err);
+            res.serverError();
+          } else {
+            return res.redirect('/<%=name%>/show/' + <%=name%>.id);
+          }    
+        });<%} else {%>
+        return res.redirect('/<%=name%>/show/' + <%=name%>.id);<%}%>
       }
     });
   },
@@ -62,11 +68,20 @@ module.exports = {
       } else {
         if (!<%=name%>) {
           return res.notFound();
-        } else {
-
+        } else {<%if(hasI18N){%>
+          <%=localFilename%>.findOne(req.getLocale(), <%=name%>, function (err, localized) {
+            if (err) {
+              sails.log.error(err);
+              res.serverError();
+            } else {
+              res.view({
+                <%=name%>: localized
+              });
+            }    
+          });<%} else {%>
           res.view({
             <%=name%>: <%=name%>
-          });
+          });<%}%>
         }
       }
     });
@@ -92,13 +107,26 @@ module.exports = {
       } else {
         if (!<%=name%>) {
           return res.notFound();
-        } else {
+        } else {<%if(hasI18N){%>
+          <%=localFilename%>.find(<%=name%>, function (err, localized) {
+            if (err) {
+              sails.log.error(err);
+              res.serverError();
+            } else {
+              var paramObj = req.flash('paramObj')
+                , obj = (paramObj[0]) ? paramObj[0] : {};
+
+              res.view({
+                <%=name%>: _.defaults(obj, localized)
+              });
+            }    
+          });<%} else {%>
           var paramObj = req.flash('paramObj')
             , obj = (paramObj[0]) ? paramObj[0] : {};
 
           res.view({
             <%=name%>: _.defaults(obj, <%=name%>)
-          });
+          });<%}%>
         }
       }
     });
@@ -106,10 +134,8 @@ module.exports = {
 
   update: function(req, res, next) {
 
-    var paramObj = {
-      <% for(var i in attributes) { %>
-        <%=attributes[i].name%> : req.param('<%=attributes[i].name%>')<%if(i < attributes.length - 1 ){%>,<%}%>
-      <% } %>
+    var paramObj = {<% for(var i in attributesNOI18N) { %>
+        <%=attributesNOI18N[i].name%> : req.param('<%=attributesNOI18N[i].name%>')<%if(i < attributesNOI18N.length - 1 ){%>,<%}%><% } %>
     }
 
     <%=nameC%>.update(req.param('id'), paramObj, function (err) {
@@ -130,8 +156,16 @@ module.exports = {
           return res.serverError();
         }
 
-      } else {
-        res.redirect('/<%=name%>/show/' + req.param('id'));
+      } else {<%if(hasI18N){%>
+        <%=localFilename%>.update(req, <%=name%>, function (err, localized) {
+          if (err) {
+            sails.log.error(err);
+            res.serverError();
+          } else {
+            res.redirect('/<%=name%>/show/' + req.param('id'));
+          }    
+        });<%} else {%>
+          res.redirect('/<%=name%>/show/' + req.param('id'));<%}%>
       }
     });
   },
