@@ -89,8 +89,7 @@ module.exports = {
     }
 
     //print attributes
-    console.log(clc.green("Attributes:"));
-    _.forEach(scope.attributes, function(attr) { console.log(attr); });
+    _.forEach(scope.attributes, function(attr) {console.log(clc.green(attr.name)+" type "+ clc.red(attr.type) +" and i18n on "+ attr.i18n);});
 
     //Escape chars for EJS
     scope.S = "<%"
