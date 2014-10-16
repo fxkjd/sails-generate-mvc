@@ -27,7 +27,7 @@ module.exports = {
     }
 
     // Create a <%=nameC%> with the params sent from 
-    // the sign-up form --> add.ejs
+    // the form --> add.ejs
     <%=nameC%>.create(paramObj, function (err, <%=name%>) {
 
       if (err) {
@@ -39,7 +39,7 @@ module.exports = {
 
           req.flash('error', error_object);
 
-          req.flash('paramObj', paramObj);
+          req.flash('paramObj', req.allParams());
 
           return res.redirect('/<%=name%>/add');
 
@@ -166,7 +166,7 @@ module.exports = {
 
           req.flash('error', error_object);
 
-          req.flash('paramObj', paramObj);
+          req.flash('paramObj', req.allParams());
 
           return res.redirect('/<%=name%>/edit/' + req.param('id'));
 
@@ -196,14 +196,22 @@ module.exports = {
       } else {
         if (!<%=name%>) {
           return res.notFound();
-        } else {
+        } else {<%if(hasI18N){%>
+          <%=nameC%>.destroy(req.param('id'), function (err) {
+            if (err) {
+              return next(err);
+            } else {
+              //TODO delete content models
+              res.redirect('/<%=name%>');
+            }
+          });<%} else {%>
           <%=nameC%>.destroy(req.param('id'), function (err) {
             if (err) {
               return next(err);
             } else {
               res.redirect('/<%=name%>');
             }
-          });        
+          });<%}%>
         }
       }
     });
