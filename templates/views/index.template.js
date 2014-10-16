@@ -38,6 +38,8 @@
 			<a href="#" tabindex="0" class="imageIcon" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="<img src='<%= SE %><%=namePlural%>[i].<%= attributes[ii].name %><%= E %>' width='100px'>" data-html="true"><i class="glyphicon glyphicon-camera"></i></a>
 			<%= S %> } <%= E %>
 			</td>
+        <% }else if(attributes[ii].type == "boolean"){ %>
+            <td><span class="label label-<%=S%>if(<%=namePlural%>[i].<%= attributes[ii].name %>){<%=E%>success<%=S%>}else{<%=E%>default<%=S%>}<%=E%>"><%= SE %> <%=namePlural%>[i].<%= attributes[ii].name %><%= E %></span></td>
 		<% }else{ %>
 			<td><%= SE %> <%=namePlural%>[i].<%= attributes[ii].name %><%= E %></td>
 		<% } %>
