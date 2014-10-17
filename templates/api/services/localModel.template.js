@@ -96,5 +96,25 @@ module.exports = {
     function(err, results){
         cb(err, results);
     });  
+  },
+
+
+  /**
+   * Function that deletes <%=name%> localitzations 
+   * @Params:: <%=name%> - <%=name%> localitzations to be deleted
+   */
+
+  delete: function (<%=name%>, cb) {
+    async.series([<%for(var i in attributesI18N){%>
+        function(callback){
+          Content.destroy({parent:<%=name%>.<%=attributesI18N[i].name%>},function(err){
+            callback(err,null);
+          });
+        },<%}%>   
+      ],
+    // optional callback
+    function(err, results){
+        cb(err, results);
+    });
   }
 }

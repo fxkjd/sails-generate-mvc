@@ -201,8 +201,14 @@ module.exports = {
             if (err) {
               return next(err);
             } else {
-              //TODO delete content models
-              res.redirect('/<%=name%>');
+              <%=localFilename%>.delete(<%=name%>, function (err, deleted) {
+                if (err) {
+                  sails.log.error(err);
+                  res.serverError();
+                } else {
+                  res.redirect('/<%=name%>');
+                }
+              });
             }
           });<%} else {%>
           <%=nameC%>.destroy(req.param('id'), function (err) {
