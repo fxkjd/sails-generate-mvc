@@ -201,14 +201,17 @@ function hasImage(attributes) {
 }
 
 function hasI18N(attributes) {
-  var parts = attributes[attributes.length-1].split(':')
-    , hasI18N = false; 
+  if(attributes[attributes.length-1]){
+    var parts = attributes[attributes.length-1].split(':')
+      , hasI18N = false; 
 
-  if (parts[0] == "i18n" && parts.length > 1) {
-    hasI18N = true;
+    if (parts[0] == "i18n" && parts.length > 1) {
+      hasI18N = true;
+    }
+    return hasI18N;
+  } else {
+    return false;
   }
-
-  return hasI18N;
 }
 
 function updatePackage (path, hasImages, hasI18N) {
@@ -221,6 +224,16 @@ function updatePackage (path, hasImages, hasI18N) {
   if(hasImages){
     packageJson.dependencies['fs-extra'] = "latest";
   }
+
+  //devDependencies
+  if(!packageJson.devDependencies){
+    packageJson.devDependencies = {};
+  }
+  packageJson.devDependencies['barrels'] = "latest";
+  packageJson.devDependencies['mocha'] = "latest";
+  packageJson.devDependencies['sails-memory'] = "latest";
+  packageJson.devDependencies['should'] = "latest";
+  packageJson.devDependencies['supertest'] = "latest";
 
   fs.writeFileSync(filename, JSON.stringify(packageJson,null,2));
 }
@@ -271,4 +284,3 @@ function INVALID_SCOPE_VARIABLE (varname, details, message) {
 
   return new Error(message);
 }
-
