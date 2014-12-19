@@ -1,4 +1,5 @@
 <!-- SELECT i18n -->
+  <%if(hasI18N){%>
   <div class="form-group">
     <label for="">Select language:</label>
      <select id="languages" name="languages">
@@ -7,6 +8,7 @@
       <% } %>		
     </select>
   </div>
+  <%}%>
 
  <% for(var i in attributes){ %>
   <div class="form-group">
