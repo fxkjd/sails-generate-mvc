@@ -9,6 +9,14 @@ describe('<%=nameC%>Controller', function() {
     });
   });
 
+  describe('add', function() {
+    it('should return success', function (done) {
+      request(sails.hooks.http.app)
+        .get('/<%=name%>/add')
+        .expect(200, done);
+    });
+  });
+
   describe('show', function() {
     it('should return success', function (done) {
       request(sails.hooks.http.app)
