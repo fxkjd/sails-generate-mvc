@@ -147,7 +147,16 @@ module.exports = {
   	'./assets/js/mvc-scripts.js': { template: {templatePath: './assets/js/scripts.template.js', force: true}  },
 
     //config files
-    './config/connections.js': { template: {templatePath: './config/connections.template.js', force: true}  }
+    './config/connections.js': { template: {templatePath: './config/connections.template.js', force: true}  },
+
+    //testing files
+    './test/mocha.opts': { template: {templatePath: './test/mocha.opts', force: true}  },    
+    './test/bootstrap.test.js': { template: {templatePath: './test/bootstrap.test.js', force: true}  },
+    './test/fixtures/apples.json': { template: {templatePath: './test/fixtures/apples.json', force: true}  },
+    './test/fixtures/oranges.json': { template: {templatePath: './test/fixtures/oranges.json', force: true}  },
+    './test/unit/controllers/ApplesController.test.js': { template: {templatePath: './test/unit/controllers/ApplesController.test.js', force: true}  },
+    './test/unit/models/Apples.test.js': { template: {templatePath: './test/unit/models/Apples.test.js', force: true}  },
+    './test/unit/models/Oranges.test.js': { template: {templatePath: './test/unit/models/Oranges.test.js', force: true}  }      
   },
 
 
@@ -236,6 +245,12 @@ function updatePackage (path, hasImages, hasI18N) {
   packageJson.devDependencies['sails-memory'] = "latest";
   packageJson.devDependencies['should'] = "latest";
   packageJson.devDependencies['supertest'] = "latest";
+
+  //scripts
+  if(!packageJson.scripts){
+    packageJson.scripts = {};
+  }
+  packageJson.scripts['test'] = "PORT=9999 NODE_ENV=test mocha -R spec -b --recursive";
 
   fs.writeFileSync(filename, JSON.stringify(packageJson,null,2));
 }
