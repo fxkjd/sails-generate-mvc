@@ -65,7 +65,7 @@ module.exports = {
     scope.nameC = utils.string.capitalize(scope.name);
     scope.namePlural = utils.inflection.pluralize(scope.name);
     scope.namePluralC = utils.string.capitalize(scope.namePlural);
-
+    
     // Decide the output filename for use in targets below:
     scope.controllerFilename = scope.nameC +"Controller"
     scope.localFilename = scope.nameC +"Local"
@@ -152,11 +152,11 @@ module.exports = {
     //testing files
     './test/mocha.opts': { template: {templatePath: './test/mocha.opts', force: true}  },    
     './test/bootstrap.test.js': { template: {templatePath: './test/bootstrap.test.js', force: true}  },
-    './test/fixtures/apples.json': { template: {templatePath: './test/fixtures/apples.json', force: true}  },
-    './test/fixtures/oranges.json': { template: {templatePath: './test/fixtures/oranges.json', force: true}  },
-    './test/unit/controllers/ApplesController.test.js': { template: {templatePath: './test/unit/controllers/ApplesController.test.js', force: true}  },
-    './test/unit/models/Apples.test.js': { template: {templatePath: './test/unit/models/Apples.test.js', force: true}  },
-    './test/unit/models/Oranges.test.js': { template: {templatePath: './test/unit/models/Oranges.test.js', force: true}  }      
+    './test/fixtures/:namePluralC.json': { template: {templatePath: './test/fixtures/model.json.template.js', force: true}  },
+    //'./test/fixtures/apples.json': { template: {templatePath: './test/fixtures/apples.json', force: true}  },
+    //'./test/fixtures/oranges.json': { template: {templatePath: './test/fixtures/oranges.json', force: true}  },
+    './test/unit/controllers/:controllerFilename.test.js': { template: {templatePath: './test/unit/controllers/controller.test.template.js', force: true}  },
+    './test/unit/models/:nameC.test.js': { template: {templatePath: './test/unit/models/model.test.template.js', force: true}  }      
   },
 
 
