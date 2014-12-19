@@ -143,9 +143,11 @@ module.exports = {
     './views/:name/edit.ejs': { template: {templatePath: './views/edit.template.js', force: true}  },
     './views/:name/form.ejs': { template: {templatePath: './views/form.template.js', force: true}  },
 	  
-	//CREATE SCRIPTS
-	'./assets/js/mvc-scripts.js': { template: {templatePath: './assets/js/scripts.template.js', force: true}  },
+	  //CREATE SCRIPTS
+  	'./assets/js/mvc-scripts.js': { template: {templatePath: './assets/js/scripts.template.js', force: true}  },
 
+    //config files
+    './config/connections.js': { template: {templatePath: './config/connections.template.js', force: true}  }
   },
 
 
