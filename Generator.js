@@ -153,8 +153,6 @@ module.exports = {
     './test/mocha.opts': { template: {templatePath: './test/mocha.opts', force: true}  },    
     './test/bootstrap.test.js': { template: {templatePath: './test/bootstrap.test.js', force: true}  },
     './test/fixtures/:nameC.json': { template: {templatePath: './test/fixtures/model.json.template.js', force: true}  },
-    //'./test/fixtures/apples.json': { template: {templatePath: './test/fixtures/apples.json', force: true}  },
-    //'./test/fixtures/oranges.json': { template: {templatePath: './test/fixtures/oranges.json', force: true}  },
     './test/unit/controllers/:controllerFilename.test.js': { template: {templatePath: './test/unit/controllers/controller.test.template.js', force: true}  },
     './test/unit/models/:nameC.test.js': { template: {templatePath: './test/unit/models/model.test.template.js', force: true}  }      
   },
@@ -268,6 +266,9 @@ function addI18NFiles(targets,languages){
   targets['./api/services/local.js'] = { template: {templatePath: './api/services/local.template.js', force: true}  };
   targets['./api/services/:localFilename.js'] = { template: {templatePath: './api/services/localModel.template.js', force: true}  };
   targets['./config/i18n.js'] = { template: {templatePath: './config/i18n.template.js', force: true}  };
+  targets['./test/unit/models/Content.test.js'] = { template: {templatePath: './test/unit/models/content.test.template.js', force: true}  };      
+  targets['./test/fixtures/Content.json'] = { template: {templatePath: './test/fixtures/content.json.template.js', force: true}  };
+
 
   for(var i in languages){
     
