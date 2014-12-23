@@ -17,6 +17,21 @@ describe('<%=nameC%>Controller', function() {
     });
   });
 
+  describe('create', function() {
+    it('should create one <%=name%>', function (done) {
+      <%=nameC%>.count({}, function (err, num) {
+        request(sails.hooks.http.app)
+          .get('/<%=name%>/create')
+          .expect(200, function (err) {
+            <%=nameC%>.find().exec(function(err, <%=namePlural%>) {             
+              <%=namePlural%>.length.should.be.eql(num+1);  
+              done();                         
+            });
+          });
+      });
+    });
+  });
+
   describe('show', function() {
     it('should return success', function (done) {
       request(sails.hooks.http.app)
@@ -40,6 +55,29 @@ describe('<%=nameC%>Controller', function() {
       request(sails.hooks.http.app)
         .get('/<%=name%>/edit/9999')
         .expect(404, done);
+    });
+  });
+
+  describe('destroy', function() {
+    it('should return not found', function (done) {   
+      request(sails.hooks.http.app)
+        .get('/<%=name%>/destroy/9999')
+        .expect(404, done);         
+    });
+
+    it('should delete one <%=name%>', function (done) {            
+      <%=nameC%>.count({}, function (err, num) {
+        <%=nameC%>.find({ where: {}, limit: 1, sort: 'createdAt DESC' }).exec(function(err, <%=namePlural%>) {             
+          request(sails.hooks.http.app)
+            .get('/<%=name%>/destroy/'+<%=namePlural%>[0].id)
+            .expect(200, function(err){
+              <%=nameC%>.find().exec(function(err, <%=namePlural%>) {             
+                <%=namePlural%>.length.should.be.eql(num-1);  
+                done();                         
+              });            
+            });
+        });
+      });
     });
   });
 });

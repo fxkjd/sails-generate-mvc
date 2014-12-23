@@ -152,7 +152,7 @@ module.exports = {
     //testing files
     './test/mocha.opts': { template: {templatePath: './test/mocha.opts', force: true}  },    
     './test/bootstrap.test.js': { template: {templatePath: './test/bootstrap.test.js', force: true}  },
-    './test/fixtures/:namePluralC.json': { template: {templatePath: './test/fixtures/model.json.template.js', force: true}  },
+    './test/fixtures/:nameC.json': { template: {templatePath: './test/fixtures/model.json.template.js', force: true}  },
     //'./test/fixtures/apples.json': { template: {templatePath: './test/fixtures/apples.json', force: true}  },
     //'./test/fixtures/oranges.json': { template: {templatePath: './test/fixtures/oranges.json', force: true}  },
     './test/unit/controllers/:controllerFilename.test.js': { template: {templatePath: './test/unit/controllers/controller.test.template.js', force: true}  },
