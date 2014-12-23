@@ -58,6 +58,23 @@ describe('<%=nameC%>Controller', function() {
     });
   });
 
+  describe('update', function() {
+    it('should update one <%=name%>', function (done) {
+      <%=nameC%>.find({ where: {}, limit: 1, sort: 'createdAt DESC' }).exec(function(err, <%=namePlural%>) {
+      var date = <%=namePlural%>[0].updatedAt;
+        request(sails.hooks.http.app)
+          .get('/<%=name%>/update/'+<%=namePlural%>[0].id)
+          .expect(200, function(err){
+            <%=nameC%>.find({id:<%=namePlural%>[0].id}).exec(function(err, <%=namePlural%>) {
+              <%=namePlural%>[0].updatedAt.should.be.above(date);
+
+              done();
+            });                       
+          });
+      });
+    });
+  });
+
   describe('destroy', function() {
     it('should return not found', function (done) {   
       request(sails.hooks.http.app)

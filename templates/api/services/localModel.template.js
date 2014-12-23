@@ -37,16 +37,16 @@ module.exports = {
    */
 
   find: function (<%=name%>, cb) {
-    async.series({<%for(var i in attributesI18N){%><%for(var j in languages){%>
-        <%=attributesI18N[i].name%><%=languages[j]%>: function(callback){
-          local.findLocal('<%=languages[j]%>', <%=name%>.<%=attributesI18N[i].name%>, function (err, localText) {          
-            callback(err, localText);              
+    async.each(locales, function( lang, callback) {
+      async.each([<%for(var i in attributesI18N){%>"<%=attributesI18N[i].name%>"<%if(i < attributesI18N.length - 1 ){%>,<%}%><%}%>], function( attr, callback) {
+          local.findLocal(lang, <%=name%>[attr], function (err, localText) {          
+            <%=name%>[attr+lang] = localText;
+            callback(err);              
           });
-        },<%}}%>
-    },
-    function(err, results) {
-      cb(err,_.assign(<%=name%>,results));
-    });
+      }, callback);       
+    }, function(err){
+      cb(err,<%=name%>);
+    }); 
   },
 
   /**
@@ -56,21 +56,20 @@ module.exports = {
    */
 
   create: function (req, <%=name%>, cb) {
-    async.series([<%for(var i in attributesI18N){%><%for(var j in languages){%>
-        function(callback){
-          if (req.param('<%=attributesI18N[i].name%><%=languages[j]%>')) {
-            local.createLocal(req.param('<%=attributesI18N[i].name%><%=languages[j]%>'), '<%=languages[j]%>', <%=name%>.<%=attributesI18N[i].name%>, function (err, localText) {          
-              callback(err, localText);              
-            });
-          } else {
-            callback(null, null);
-          }
-        },<%}}%>      
-      ],
-    // callback
-    function(err, results){
-        cb(err, results);
-    });  
+    async.each(locales, function( lang, callback) {
+      async.each([<%for(var i in attributesI18N){%>"<%=attributesI18N[i].name%>"<%if(i < attributesI18N.length - 1 ){%>,<%}%><%}%>], function( attr, callback) {
+        var param = attr+lang;
+        if (req.param(param)) {
+          local.createLocal(req.param(param), lang, <%=name%>[attr], function (err, localText) {          
+            callback(err);              
+          });
+        } else {
+          callback(null);
+        }
+      }, callback);       
+    }, function(err){
+      cb(err,null);
+    });     
   },
 
 
@@ -81,21 +80,20 @@ module.exports = {
    */
 
   update: function (req, <%=name%>, cb) {
-    async.series([<%for(var i in attributesI18N){%><%for(var j in languages){%>
-        function(callback){
-          if (req.param('<%=attributesI18N[i].name%><%=languages[j]%>') != null) {
-            local.updateLocal(req.param('<%=attributesI18N[i].name%><%=languages[j]%>'), '<%=languages[j]%>', <%=name%>.<%=attributesI18N[i].name%>, function (err, localText) {          
-              callback(err, localText);              
-            });
-          } else {
-            callback(null, null);
-          }
-        },<%}}%>   
-      ],
-    // optional callback
-    function(err, results){
-        cb(err, results);
-    });  
+    async.each(locales, function( lang, callback) {
+      async.each([<%for(var i in attributesI18N){%>"<%=attributesI18N[i].name%>"<%if(i < attributesI18N.length - 1 ){%>,<%}%><%}%>], function( attr, callback) {
+        var param = attr+lang;
+        if (req.param(param)) {
+          local.updateLocal(req.param(param), lang, <%=name%>[attr], function (err, localText) {          
+            callback(err);              
+          });
+        } else {
+          callback(null);
+        }
+      }, callback);       
+    }, function(err){
+      cb(err,null);
+    });
   },
 
 

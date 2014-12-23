@@ -100,7 +100,9 @@ module.exports = {
 
     Content.find({parent:parent}, function (err, contents) { 
       if (err || !contents || contents.length <= 0) {
-        sails.log.error(err);
+        if(err){
+          sails.log.error(err);
+        }
         cb(err, null);
       } else {
         cb(null, contents[ _contentIndex(lang, contents) ].text);        
