@@ -268,6 +268,7 @@ function addI18NFiles(targets,languages){
   targets['./config/i18n.js'] = { template: {templatePath: './config/i18n.template.js', force: true}  };
   targets['./test/unit/models/Content.test.js'] = { template: {templatePath: './test/unit/models/content.test.template.js', force: true}  };      
   targets['./test/fixtures/Content.json'] = { template: {templatePath: './test/fixtures/content.json.template.js', force: true}  };
+  targets['./test/unit/services/local.test.js'] = { template: {templatePath: './test/unit/services/local.test.template.js', force: true}  };
 
 
   for(var i in languages){
