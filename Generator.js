@@ -62,6 +62,7 @@ module.exports = {
 
     //Names used on MVC
     scope.name = utils.string.decapitalize(scope.args[0]);
+    scope.nameLower = scope.name.toLowerCase();
     scope.nameC = utils.string.capitalize(scope.name);
     scope.namePlural = utils.inflection.pluralize(scope.name);
     scope.namePluralC = utils.string.capitalize(scope.namePlural);
@@ -137,11 +138,11 @@ module.exports = {
     './api/services/validator.js': { template: {templatePath: './api/services/validator.template.js', force: true}  },
     
     //CREATE VIEWS
-    './views/:name/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
-    './views/:name/add.ejs': { template: {templatePath: './views/add.template.js', force: true}  },
-    './views/:name/show.ejs': { template: {templatePath: './views/show.template.js', force: true}  },
-    './views/:name/edit.ejs': { template: {templatePath: './views/edit.template.js', force: true}  },
-    './views/:name/form.ejs': { template: {templatePath: './views/form.template.js', force: true}  },
+    './views/:nameLower/index.ejs': { template: {templatePath: './views/index.template.js', force: true}  },
+    './views/:nameLower/add.ejs': { template: {templatePath: './views/add.template.js', force: true}  },
+    './views/:nameLower/show.ejs': { template: {templatePath: './views/show.template.js', force: true}  },
+    './views/:nameLower/edit.ejs': { template: {templatePath: './views/edit.template.js', force: true}  },
+    './views/:nameLower/form.ejs': { template: {templatePath: './views/form.template.js', force: true}  },
 	  
 	  //CREATE SCRIPTS
   	'./assets/js/mvc-scripts.js': { template: {templatePath: './assets/js/scripts.template.js', force: true}  },
