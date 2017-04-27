@@ -1,6 +1,6 @@
 # sails-generate-mvc
 
-A `MVC` generator for use with the Sails command-line interface.
+A `MVC` generator to use with the Sails command-line interface.
 
 ![MVC Sample](http://i.imgur.com/4bzthh6.jpg)
 
